@@ -4,16 +4,17 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(
-    localStorage.getItem("token")
+    localStorage.getItem("accesstoken")
   );
 
-  const login = (jwt) => {
-    localStorage.setItem("token", jwt);
+  const login = (jwt, refresh) => {
+    localStorage.setItem("accesstoken", jwt);
+    localStorage.setItem("refreshtoken", refresh);
     setToken(jwt);
   };
 
   const logout = () => {
-    localStorage.removeItem("token");
+    localStorage.removeItem("accesstoken");
     setToken(null);
   };
 
